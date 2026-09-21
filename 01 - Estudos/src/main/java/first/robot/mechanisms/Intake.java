@@ -1,5 +1,6 @@
 package first.robot.mechanisms;
 
+import org.wpilib.command3.Command;
 import org.wpilib.command3.Mechanism;
 import org.wpilib.math.system.DCMotor;
 import org.wpilib.math.system.Models;
@@ -38,5 +39,12 @@ public class Intake implements Mechanism   {
         Telemetry.log("Intake/Coletor/RPM", pegarRPM());
         
         Telemetry.log("Intake/Coletor/Voltage", voltageAplicada);
+    }
+
+    public Command girar() {
+
+        return runRepeatedly(() -> {
+            setarVoltage(6.0);
+        }).whenCanceled(this::pararMotor).named("Shooter Spin");
     }
 }
